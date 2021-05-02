@@ -1,10 +1,10 @@
 import test from "ava";
-import { applyDates } from "../dist/index.js";
+import { mapDates } from "../dist/index.js";
 
 // no data conversion
 const testData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const testDate1 = [2015, 0, 1];
-const range1 = applyDates(
+const range1 = mapDates(
   testData1,
   new Date(testDate1[0], testDate1[1], testDate1[2]),
   "m",
@@ -13,7 +13,7 @@ const range1 = applyDates(
 
 // data conversion
 const testData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const range2 = applyDates(
+const range2 = mapDates(
   testData2,
   new Date(testDate1[0], testDate1[1], testDate1[2]),
   "m",

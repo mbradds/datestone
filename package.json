@@ -8,7 +8,7 @@
     "test": "npm run build && ava",
     "build": "rm -rf ./dist && tsc"
   },
-  "author": "",
+  "author": "Grant Moss",
   "license": "MIT",
   "devDependencies": {
     "@ava/typescript": "^1.1.1",

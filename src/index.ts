@@ -1,21 +1,21 @@
-interface Units {
+type Units = {
   conversion: number;
   operation: string;
   convert: boolean;
-}
+};
 
-interface NewRow {
+type NewRow = {
   dateNew: number;
   valueNew: any;
-}
+};
 
-interface DateFunction {
+type DateFunction = {
   (d: Date, i: number): number;
-}
+};
 
-interface Adder {
+type Adder = {
   (row: number, startDate: Date): NewRow;
-}
+};
 
 function changeValue(u: Units) {
   let valueTransformer;
@@ -75,7 +75,7 @@ function addRow(units: Units, increment: number, datePlusPlus: DateFunction) {
   return adder;
 }
 
-export function applyDates(
+export function mapDates(
   series: number[],
   date: Date,
   frequency = "monthly",
