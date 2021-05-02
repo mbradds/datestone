@@ -79,11 +79,11 @@ export function applyDates(
   return nextSeries;
 }
 
-const testData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const testDate = [2015, 1, 1];
-const myDateRange = applyDates(
-  testData,
-  new Date(testDate[0], testDate[1], testDate[2])
-);
+// const testData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// const testDate = [2015, 1, 1];
+// const myDateRange = applyDates(
+//   testData,
+//   new Date(testDate[0], testDate[1], testDate[2])
+// );
 
 
