@@ -2,6 +2,7 @@ type Units = {
   conversion: number;
   operation: string;
   convert: boolean;
+  round: number;
 };
 
 type NewRow = {
@@ -22,22 +23,33 @@ function changeValue(u: Units) {
   const dontConvert = function noTransform(row: number) {
     return row;
   };
+  const convertNoRound = (row: number) => {
+    return row * u.conversion;
+  };
+  const convertWithRound = (row: number) => {
+    return parseFloat((row * u.conversion).toFixed(u.round));
+  };
+  let rowFunction = convertNoRound;
+  if (u.round >= 0) {
+    rowFunction = convertWithRound;
+  }
+
   if (u.convert) {
     if (u.operation === "*") {
       valueTransformer = function convert(row: number) {
-        return row ? row * u.conversion : null;
+        return row ? rowFunction(row) : null;
       };
     } else if (u.operation === "/") {
       valueTransformer = function convert(row: number) {
-        return row ? row / u.conversion : null;
+        return row ? rowFunction(row) : null;
       };
     } else if (u.operation === "+") {
       valueTransformer = function convert(row: number) {
-        return row ? row + u.conversion : null;
+        return row ? rowFunction(row) : null;
       };
     } else if (u.operation === "-") {
       valueTransformer = function convert(row: number) {
-        return row ? row - u.conversion : null;
+        return row ? rowFunction(row) : null;
       };
     } else {
       valueTransformer = dontConvert;
@@ -80,7 +92,7 @@ export function mapDates(
   date: Date,
   frequency = "monthly",
   method = "forward",
-  transform = { convert: false, operation: "none", conversion: 0 }
+  transform = { convert: false, operation: "none", conversion: 0, round: -1 }
 ) {
   let increment = 1;
   if (method === "backward" || method === "b") {

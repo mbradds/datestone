@@ -18,7 +18,7 @@ const range2 = mapDates(
   new Date(testDate1[0], testDate1[1], testDate1[2]),
   "m",
   "date",
-  { convert: true, operation: "*", conversion: 6.2898 }
+  { convert: true, operation: "*", conversion: 6.2898, round: 4 }
 );
 
 test("input/output same length", (t) => {
@@ -41,6 +41,6 @@ test("max date accurate", (t) => {
 
 test("conversion values", (t) => {
   let firstVal = range2[0][1];
-  t.is(firstVal, 1*6.2898)
-  t.is(testData2[0], 1)
+  t.is(firstVal, 1 * 6.2898);
+  t.is(testData2[0], 1);
 });
