@@ -4,86 +4,98 @@ interface Units {
   convert: boolean;
 }
 
+interface NewRow {
+  dateNew: number;
+  valueNew: any;
+}
+
 interface DateFunction {
-  (d: Date): number;
+  (d: Date, i: number): number;
+}
+
+interface Adder {
+  (row: number, startDate: Date): NewRow;
 }
 
 function changeValue(u: Units) {
   let valueTransformer;
+  const dontConvert = function noTransform(row: number) {
+    return row;
+  };
   if (u.convert) {
-    valueTransformer = function convert(row: number) {
-      return row ? row * u.conversion : null;
-    };
+    if (u.operation === "*") {
+      valueTransformer = function convert(row: number) {
+        return row ? row * u.conversion : null;
+      };
+    } else if (u.operation === "/") {
+      valueTransformer = function convert(row: number) {
+        return row ? row / u.conversion : null;
+      };
+    } else if (u.operation === "+") {
+      valueTransformer = function convert(row: number) {
+        return row ? row + u.conversion : null;
+      };
+    } else if (u.operation === "-") {
+      valueTransformer = function convert(row: number) {
+        return row ? row - u.conversion : null;
+      };
+    } else {
+      valueTransformer = dontConvert;
+    }
   } else {
-    valueTransformer = function dontConvert(row: number) {
-      return row;
-    };
+    valueTransformer = dontConvert;
   }
   return valueTransformer;
 }
 
-function addDate(f: string, i: number, outFormat: string) {
-  const dFunc: DateFunction = (d) => d.setDate(d.getDate() + i);
-  const mFunc: DateFunction = (d) => d.setMonth(d.getMonth() + i);
-  const yFunc: DateFunction = (d) => d.setFullYear(d.getFullYear() + i);
+function getDateFunction(frequency: string) {
+  const dFunc: DateFunction = (d, i) => d.setDate(d.getDate() + i);
+  const mFunc: DateFunction = (d, i) => d.setMonth(d.getMonth() + i);
+  const yFunc: DateFunction = (d, i) => d.setFullYear(d.getFullYear() + i);
 
   let datePlusPlus: DateFunction = mFunc;
-  if (f === "daily" || f === "d") {
+  if (frequency === "daily" || frequency === "d") {
     datePlusPlus = dFunc;
-  } else if (f === "monthly" || f === "m") {
+  } else if (frequency === "monthly" || frequency === "m") {
     datePlusPlus = mFunc;
-  } else if (f === "yearly" || f === "y") {
+  } else if (frequency === "yearly" || frequency === "y") {
     datePlusPlus = yFunc;
   }
-  if (outFormat === "date" || outFormat === "d") {
-    return function milliToDate(d: Date) {
-      return new Date(datePlusPlus(d));
-    };
-  }
+
   return datePlusPlus;
 }
 
-function addRow(
-  units: Units,
-  freq: string,
-  increment: number,
-  outFormat: string
-) {
-  const dateFunction = addDate(freq, increment, outFormat);
+function addRow(units: Units, increment: number, datePlusPlus: DateFunction) {
   const rowFunction = changeValue(units);
-  return function adder(row: number, startDate: Date) {
-    const nextDate = dateFunction(startDate);
-    return [nextDate, rowFunction(row)];
+  const adder: Adder = (row: number, startDate: Date) => {
+    const nextDate = datePlusPlus(startDate, increment);
+    return { dateNew: nextDate, valueNew: rowFunction(row) };
   };
+
+  return adder;
 }
 
 export function applyDates(
   series: number[],
   date: Date,
-  transform = { convert: false, operation: "none", conversion: 0 },
   frequency = "monthly",
-  outputFormat = "number",
-  method = "forward"
+  method = "forward",
+  transform = { convert: false, operation: "none", conversion: 0 }
 ) {
   let increment = 1;
   if (method === "backward" || method === "b") {
     increment = -1;
   }
 
-  const addFunction = addRow(transform, frequency, increment, outputFormat);
-  const nextSeries = series.map((row) => {
-    const [nextDate, rowCalc] = addFunction(row, date);
-    return [nextDate, rowCalc];
+  // date needs to be de-incremented by one unit to avoid if statement checking for first date addition
+  const datePlusPlus = getDateFunction(frequency);
+  const dateMinusOne = new Date(datePlusPlus(date, -1));
+
+  const addFunction = addRow(transform, increment, datePlusPlus);
+  const seriesWithDate = series.map((row) => {
+    const { dateNew, valueNew } = addFunction(row, dateMinusOne);
+    return [dateNew, valueNew];
   });
 
-  return nextSeries;
+  return seriesWithDate;
 }
-
-// const testData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// const testDate = [2015, 1, 1];
-// const myDateRange = applyDates(
-//   testData,
-//   new Date(testDate[0], testDate[1], testDate[2])
-// );
-
-
