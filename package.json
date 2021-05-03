@@ -1,13 +1,19 @@
 {
   "name": "datestone",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "type": "module",
   "scripts": {
     "test": "npm run build && ava",
-    "build": "rm -rf ./dist && tsc"
+    "build": "rm -rf ./dist && tsc && npm run rename",
+    "rename": "mv ./dist/index.js ./dist/index.mjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbradds/datestone.git"
+  },
+  "homepage": "https://github.com/mbradds/datestone#readme",
   "author": "Grant Moss",
   "license": "MIT",
   "devDependencies": {

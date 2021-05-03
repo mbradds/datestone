@@ -56,4 +56,4 @@ Highcharts.chart('container', {
 });
 ```
 
-datestone has the capability to fill dates forwards (starting date) or backwards (ending date), as well as transform the "data" column with an optional unit conversion. The best part? There is no combination of parameters that results in anything other than a single pass over the array, without any conditionals evelauted on each data point. Higher order functions are "teed up" at run time to facilitate ultra fast data processing.
+datestone has the capability to fill dates forwards (starting date) or backwards (ending date), as well as transform the "data" column with an optional unit conversion. The best part? There is no combination of parameters that results in anything other than a single pass over the array, without any conditionals evaluated on each data point. Higher order functions are "teed up" at run time to facilitate ultra fast data processing.
