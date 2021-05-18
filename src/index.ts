@@ -87,7 +87,7 @@ function addRow(units: Units, increment: number, datePlusPlus: DateFunction) {
   return adder;
 }
 
-export function mapDates(
+export function mapDatesToList(
   series: number[],
   date: Date,
   frequency = "monthly",
@@ -107,6 +107,37 @@ export function mapDates(
   const seriesWithDate = series.map((row) => {
     const { dateNew, valueNew } = addFunction(row, dateMinusOne);
     return [dateNew, valueNew];
+  });
+
+  return seriesWithDate;
+}
+
+export function mapDatesToJson(
+  series: any[],
+  date: Date,
+  valueCol: string,
+  dateCol = "date",
+  frequency = "monthly",
+  method = "forward",
+  transform = { convert: false, operation: "none", conversion: 0, round: -1 }
+) {
+  let increment = 1;
+  if (method === "backward" || method === "b") {
+    increment = -1;
+  }
+
+  // date needs to be de-incremented by one unit to avoid if statement checking for first date addition
+  const datePlusPlus = getDateFunction(frequency);
+  const dateMinusOne = new Date(datePlusPlus(date, -1));
+
+  const addFunction = addRow(transform, increment, datePlusPlus);
+  const seriesWithDate = series.map((row) => {
+    const value: number = row[valueCol]
+    const newRow = row
+    const { dateNew, valueNew } = addFunction(value, dateMinusOne);
+    newRow[dateCol] = dateNew
+    newRow[valueCol] = valueNew
+    return newRow;
   });
 
   return seriesWithDate;
