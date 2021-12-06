@@ -2,3 +2,4 @@ node_modules
 dist
 .vscode
 whyRanger
+tsconfig.tsbuildinfo

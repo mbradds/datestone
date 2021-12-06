@@ -30,30 +30,28 @@ const changeValue = (u: Units) => {
   if (u.convert) {
     if (["*", "/", "+", "-"].includes(u.operation)) {
       return (row: number) => (row ? rowFunction(row) : null);
-    } 
-      return dontConvert;
-    
-  } 
+    }
     return dontConvert;
-  
+  }
+  return dontConvert;
 };
 
 const getDateFunction = (frequency: string): DateFunction => {
   if (frequency === "daily" || frequency === "d") {
     return (d, i) => d.setDate(d.getDate() + i);
-  } if (frequency === "yearly" || frequency === "y") {
+  }
+  if (frequency === "yearly" || frequency === "y") {
     return (d, i) => d.setFullYear(d.getFullYear() + i);
-  } 
-    return (d, i) => d.setMonth(d.getMonth() + i);
-  
+  }
+  return (d, i) => d.setMonth(d.getMonth() + i);
 };
 
 const addRow =
   (units: Units, increment: number, datePlusPlus: DateFunction): Adder =>
   (row: number, startDate: Date) => ({
-      dateNew: datePlusPlus(startDate, increment),
-      valueNew: changeValue(units)(row),
-    });
+    dateNew: datePlusPlus(startDate, increment),
+    valueNew: changeValue(units)(row),
+  });
 
 const determineIncrement = (method: string) =>
   method === "backward" || method === "b" ? -1 : 1;
@@ -111,12 +109,12 @@ export const mapDatesToJson = (
 export const fillBetween = (
   start: DateList,
   end: DateList,
-  value: any,
+  value: number,
   frequency = "daily",
   method = "forward",
   transform = { convert: false, operation: "none", conversion: 0, round: -1 }
 ) => {
-  const series = [];
+  const series: any[] = [];
   const startValue = value;
   let startDate = new Date(start[0], start[1], start[2]);
   const endDate = new Date(end[0], end[1], end[2]);
