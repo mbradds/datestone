@@ -1,5 +1,5 @@
 import test from "ava";
-import { mapDatesToList, mapDatesToJson, fillBetween } from "../dist/index.js";
+import { mapDatesToList, mapDatesToJson, fillBetween } from "../dist/esm/index.js";
 
 // no data conversion
 const testData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
