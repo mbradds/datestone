@@ -1,10 +1,10 @@
 import test from "ava";
-import { mapDatesToList, mapDatesToJson, fillBetween } from "../dist/index.js";
+import datestone from "../src/datestone";
 
 // no data conversion
 const testData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const testDate1 = [2015, 0, 1];
-const range1 = mapDatesToList(
+const range1 = datestone.mapDatesToList(
   testData1,
   new Date(testDate1[0], testDate1[1], testDate1[2]),
   "m",
@@ -13,7 +13,7 @@ const range1 = mapDatesToList(
 
 // data conversion
 const testData2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const range2 = mapDatesToList(
+const range2 = datestone.mapDatesToList(
   testData2,
   new Date(testDate1[0], testDate1[1], testDate1[2]),
   "m",
@@ -50,7 +50,7 @@ test("conversion values", (t) => {
 // no data conversion
 const testData3 = [{ value: 1 }, { value: 2 }, { value: 3 }];
 const testDate3 = [2015, 0, 1];
-const range3 = mapDatesToJson(
+const range3 = datestone.mapDatesToJson(
   testData3,
   new Date(testDate3[0], testDate3[1], testDate3[2]),
   "value",
@@ -66,7 +66,7 @@ test("min json date accurate", (t) => {
 
 test("fill between dates", (t) => {
   const value = 5;
-  const series = fillBetween([2015, 0, 1], [2015, 11, 31], value);
+  const series = datestone.fillBetween([2015, 0, 1], [2015, 11, 31], value);
   t.is(series.length, 365);
   t.is(series[0][1], value);
 });
