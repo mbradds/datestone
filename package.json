@@ -2,10 +2,9 @@
   "name": "datestone",
   "version": "1.0.3",
   "description": "",
-  "main": "dist/index.js",
-  "sideEffects": false,
+  "main": "dist/esm/datestone.js",
   "scripts": {
-    "test": "npm run build && ava",
+    "test": "ava",
     "build": "tsc -b",
     "prebuild": "npm run clean",
     "clean": "rm -rf ./dist",
@@ -23,8 +22,7 @@
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "ava": "^3.15.0",
-    "eslint": "^8.4.0",
-    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "ts-node": "^10.4.0",
@@ -37,6 +35,9 @@
   "os": [
     "linux",
     "win32"
+  ],
+  "files": [
+    "dist"
   ],
   "ava": {
     "files": [

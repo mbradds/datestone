@@ -56,7 +56,7 @@ const addRow =
 const determineIncrement = (method: string) =>
   method === "backward" || method === "b" ? -1 : 1;
 
-export const mapDatesToList = (
+const mapDatesToList = (
   series: number[],
   date: Date,
   frequency = "monthly",
@@ -78,7 +78,7 @@ export const mapDatesToList = (
   });
 };
 
-export const mapDatesToJson = (
+const mapDatesToJson = (
   series: any[],
   date: Date,
   valueCol: string,
@@ -106,7 +106,7 @@ export const mapDatesToJson = (
   });
 };
 
-export const fillBetween = (
+const fillBetween = (
   start: DateList,
   end: DateList,
   value: number,
@@ -132,3 +132,6 @@ export const fillBetween = (
   }
   return series;
 };
+
+const datestone = { mapDatesToList, mapDatesToJson, fillBetween };
+export default datestone;
