@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "es5",
+    "target": "es6",
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
@@ -9,7 +9,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "composite": true,
-    "removeComments": true,
+    "removeComments": false,
     "noEmit": true,
     "downlevelIteration": true,
     "strict": true,

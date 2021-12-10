@@ -106,6 +106,16 @@ const mapDatesToJson = (
   });
 };
 
+/**
+ * Generate a nested array of [[start date], [end date], value] for a given start date, end date, and value.
+ * @param {Array} start Start date [year, month, day]
+ * @param {Array} end End date [year, month, day]
+ * @param {number} value Numeric value applied to each period between start and end
+ * @param {string} [frequency=daily] daily/d, monthly/m, or yearly/y time intervals required between start and end
+ * @param {string} [method=forward] fill the array beginning with start (forward) to end, or from end descending to start (backward)
+ * @param {Object} [transform={ convert: false, operation: "none", conversion: 0, round: -1 }] Apply a transformation/unit conversion to value
+ * @returns {Array}
+ */
 const fillBetween = (
   start: DateList,
   end: DateList,
