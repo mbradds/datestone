@@ -19,7 +19,7 @@ When dealing with large time series datasets that need to be sent over the netwo
 ## How it works
 
 ```javascript
-import { mapDatesToList, mapDatesToJson } from "datestone";
+import datestone from "datestone";
 
 // this data is going to take up too much space in our bundle!
 let dataWithDate = [
@@ -32,7 +32,7 @@ let dataWithDate = [
 let dataWithoutDate = [0.0284, 0.5701]
 
 // dataForChart will now mirror "dataWithDate"
-let dataForChart = mapDatesToList(dataWithoutDate, new Date(2015, 1,1), "daily")
+let dataForChart = datestone.mapDatesToList(dataWithoutDate, new Date(2015, 1,1), "daily")
 
 // Highcharts use case
 Highcharts.chart('container', {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "target": "es6",
-    "allowJs": true,
+    "allowJs": false,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -29,7 +29,7 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "test"],
+  "exclude": ["node_modules", "build", "test", "dist"],
   "references": [
     {
       "path": "./tsconfig.cjs.json"

@@ -1,8 +1,9 @@
 {
   "name": "datestone",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/cjs/datestone.js",
+  "module": "dist/esm/datestone.js",
   "types": "dist/cjs/datestone.d.ts",
   "type": "commonjs",
   "scripts": {

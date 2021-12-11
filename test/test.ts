@@ -1,5 +1,6 @@
 import test from "ava";
 import datestone from "../src/datestone";
+// import datestone from "../dist/cjs/datestone.js";
 
 // no data conversion
 const testData1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

@@ -143,5 +143,9 @@ const fillBetween = (
   return series;
 };
 
-const datestone = { mapDatesToList, mapDatesToJson, fillBetween };
+const datestone = {
+  mapDatesToList: mapDatesToList,
+  mapDatesToJson: mapDatesToJson,
+  fillBetween: fillBetween,
+};
 export default datestone;
