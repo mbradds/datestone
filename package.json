@@ -1,6 +1,6 @@
 {
   "name": "datestone",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "type": "module",
   "main": "dist/esm/datestone.js",
@@ -25,8 +25,8 @@
   "license": "MIT",
   "devDependencies": {
     "@ava/typescript": "^3.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
     "ava": "^3.15.0",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
@@ -39,7 +39,8 @@
     "npm": "8.x"
   },
   "os": [
-    "linux"
+    "linux",
+    "win32"
   ],
   "files": [
     "dist"

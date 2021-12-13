@@ -56,6 +56,15 @@ const addRow =
 const determineIncrement = (method: string) =>
   method === "backward" || method === "b" ? -1 : 1;
 
+/**
+ * Converts an array of numeric data into a multi-dimensional array of [[date, value]] pairs starting with an input date.
+ * @param {Array} series Input list of numeric data.
+ * @param {Date} date The start date [method=forward] or end date [method=backward] for the new date column.
+ * @param {string} [frequency=monthly] daily/d, monthly/m, or yearly/y time interval applied ascending [method=forward] or descending [method=backward] to each date.
+ * @param {string} [method=forward] Fills the date column with ascending dates starting with input date.
+ * @param {Object} [transform={ convert: false, operation: "none", conversion: 0, round: -1 }] Apply a transformation/unit conversion to each value in the input series.
+ * @returns {Array}
+ */
 const mapDatesToList = (
   series: number[],
   date: Date,
@@ -78,6 +87,17 @@ const mapDatesToList = (
   });
 };
 
+/**
+ * Adds a date column to a JSON dataset based on a given start or end date.
+ * @param {Array} series The input JSON data without a date column.
+ * @param {Date} date The start date [method=forward] or end date [method=backward] for the new date column.
+ * @param {string} valueCol The column name of the numeric data.
+ * @param {string} [dateCol=date] The column name/key to be assigned to the new date column.
+ * @param {string} [frequency=monthly] daily/d, monthly/m, or yearly/y time interval applied ascending [method=forward] or descending [method=backward] to each date.
+ * @param {string} [method=forward] Fills the date column with ascending dates starting with input date.
+ * @param {Object} [transform={ convert: false, operation: "none", conversion: 0, round: -1 }] Apply a transformation/unit conversion to each value in valueCol.
+ * @returns {Array} JSON style array with new date column and optional conversion on numeric data column.
+ */
 const mapDatesToJson = (
   series: any[],
   date: Date,
@@ -110,10 +130,10 @@ const mapDatesToJson = (
  * Generate a nested array of [[start date], [end date], value] for a given start date, end date, and value.
  * @param {Array} start Start date [year, month, day]
  * @param {Array} end End date [year, month, day]
- * @param {number} value Numeric value applied to each period between start and end
- * @param {string} [frequency=daily] daily/d, monthly/m, or yearly/y time intervals required between start and end
- * @param {string} [method=forward] fill the array beginning with start (forward) to end, or from end descending to start (backward)
- * @param {Object} [transform={ convert: false, operation: "none", conversion: 0, round: -1 }] Apply a transformation/unit conversion to value
+ * @param {number} value Numeric value applied to each period between start and end.
+ * @param {string} [frequency=daily] daily/d, monthly/m, or yearly/y time intervals required between start and end.
+ * @param {string} [method=forward] fill the array beginning with start (forward) to end, or from end descending to start (backward).
+ * @param {Object} [transform={ convert: false, operation: "none", conversion: 0, round: -1 }] Apply a transformation/unit conversion to value.
  * @returns {Array}
  */
 const fillBetween = (

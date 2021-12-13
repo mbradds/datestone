@@ -19,20 +19,20 @@ When dealing with large time series datasets that need to be sent over the netwo
 ## How it works
 
 ```javascript
-import datestone from "datestone";
+import { mapDatesToList } from "datestone";
 
 // this data is going to take up too much space in our bundle!
-let dataWithDate = [
+const dataWithDate = [
     ["2015-01-01", 0.0284],
     ["2015-01-02", 0.5701],
   ...
 ];
 
 // delete the "date" column in the backend first!
-let dataWithoutDate = [0.0284, 0.5701]
+const dataWithoutDate = [0.0284, 0.5701]
 
 // dataForChart will now mirror "dataWithDate"
-let dataForChart = datestone.mapDatesToList(dataWithoutDate, new Date(2015, 1,1), "daily")
+const dataForChart = mapDatesToList(dataWithoutDate, new Date(2015, 1,1), "daily")
 
 // Highcharts use case
 Highcharts.chart('container', {
