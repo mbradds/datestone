@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
     "incremental": true,
-    "target": "es6",
+    "target": "es2015",
+    "module": "ES2020",
     "allowJs": false,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "dist",
+    "outDir": "dist/esm",
     "rootDir": "src",
     "composite": true,
     "removeComments": false,
-    "noEmit": true,
+    "noEmit": false,
     "downlevelIteration": true,
     "strict": true,
     "noImplicitAny": false,
@@ -29,13 +30,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "test", "dist"],
-  "references": [
-    {
-      "path": "./tsconfig.cjs.json"
-    },
-    {
-      "path": "./tsconfig.esm.json"
-    }
-  ]
+  "exclude": ["node_modules", "build", "test", "dist"]
 }

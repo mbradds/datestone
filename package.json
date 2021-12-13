@@ -1,11 +1,14 @@
 {
   "name": "datestone",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
-  "main": "dist/cjs/datestone.js",
+  "type": "module",
+  "main": "dist/esm/datestone.js",
   "module": "dist/esm/datestone.js",
-  "types": "dist/cjs/datestone.d.ts",
-  "type": "commonjs",
+  "types": "dist/esm/datestone.d.ts",
+  "exports": {
+    "import": "./dist/esm/datestone.js"
+  },
   "scripts": {
     "test": "ava",
     "build": "tsc -b",
@@ -36,8 +39,7 @@
     "npm": "8.x"
   },
   "os": [
-    "linux",
-    "win32"
+    "linux"
   ],
   "files": [
     "dist"
@@ -53,7 +55,8 @@
       "configurableModuleFormat": true
     },
     "nodeArguments": [
-      "--loader=ts-node/esm"
+      "--loader=ts-node/esm",
+      "--trace-warnings"
     ]
   }
 }
